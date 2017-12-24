@@ -5,13 +5,13 @@ CONFDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
 
 if [[ -f "$ZDOTDIR/.zshrc" ]]; then
-  echo "A zsh config is already installed at $ZDOTDIR/.zshrc."
-  ls -l "$ZDOTDIR/.zshrc"
+  echo "Zsh configuration files already exist on '$ZDOTDIR'!"
+  ls -la "$ZDOTDIR/.z"*
   read -p "Are you sure you want to replace it? " -n 1 -r
+  echo
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
   fi
-  echo
 fi
 
 echo "Installing zsh config to '$ZDOTDIR'"
