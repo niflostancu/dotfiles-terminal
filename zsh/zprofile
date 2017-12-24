@@ -1,0 +1,5 @@
+ZSH_CONFIG_DIR="$(dirname "${${(%):-%N}:A}")"
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+
+source "${ZSH_CONFIG_DIR}/env.zsh"
+

@@ -1,0 +1,60 @@
+# Interactive ZSH configuration script
+
+# Always start a TMUX session
+if [[ -z "$TMUX" ]]; then
+  if tmux has-session -t "tmp" 2>/dev/null; then
+    exec tmux -2 attach-session -t "tmp"
+  else
+    exec tmux -2 new-session -s "tmp"
+  fi
+fi
+
+ZSH_CONFIG_DIR="$(dirname "${${(%):-%N}:A}")"
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+
+ZCONFIG_BEFORE=(
+  "settings.zsh"
+  "appearance.zsh"
+  "settings.local.zsh"
+  "keybindings.zsh"
+  "aliases.zsh"
+)
+ZCONFIG_AFTER=(
+  "completion.zsh"
+)
+
+zconfig_plugins_include() {
+  # prerequisites for Oh-My-Zsh based themes
+  zgen oh-my-zsh "lib/git.zsh"
+  zgen oh-my-zsh "lib/prompt_info_functions.zsh"
+  zgen oh-my-zsh "lib/theme-and-appearance.zsh"
+
+  # All hail VI
+  zgen oh-my-zsh "plugins/vi-mode"
+  # FISH-like command auto suggestions
+  zgen load zsh-users/zsh-autosuggestions
+  # Up-Down based history search
+  zgen load zsh-users/zsh-history-substring-search
+  # Fast command-line syntax highlighting
+  zgen load zdharma/fast-syntax-highlighting
+  # Enhanced ls script
+  zgen load supercrabtree/k
+
+  # Fuzzy Finder (needs to be installed via package manager)
+  if [[ -s "/usr/share/fzf/key-bindings.zsh" ]]; then
+    zgen load /usr/share/fzf/key-bindings.zsh
+    zgen load /usr/share/fzf/completion.zsh
+  fi
+
+  # Spaceship Theme (requires OMZ)
+  zgen load denysdovhan/spaceship-zsh-theme spaceship
+
+  [[ -f "$ZSH_CONFIG_DIR/plugins.local.zsh" ]] && source "$ZSH_CONFIG_DIR/plugins.local.zsh"
+}
+
+# Load settings (cached for speed)
+if [[ ! -s "$ZSH_CACHE_DIR/config.zsh" ]]; then
+  source "$ZSH_CONFIG_DIR/lib/init.zsh"
+fi
+source "$ZSH_CACHE_DIR/config.zsh"
+
