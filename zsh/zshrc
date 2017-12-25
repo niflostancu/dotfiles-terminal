@@ -21,6 +21,7 @@ ZCONFIG_BEFORE=(
 )
 ZCONFIG_AFTER=(
   "completion.zsh"
+  "overrides.local.zsh"
 )
 
 zconfig_plugins_include() {

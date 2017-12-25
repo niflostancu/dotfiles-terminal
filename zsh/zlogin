@@ -1,2 +1,2 @@
-# Startup file read in interactive login shells
+# Startup file read in interactive login shells (loaded after zshrc)
 
