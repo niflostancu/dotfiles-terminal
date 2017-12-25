@@ -7,8 +7,16 @@ export GREP_COLOR='38;5;202'
 # Set the Less input preprocessor.
 if (( $+commands[lesspipe.sh] )); then
   export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+  export LESS_ADVANCED_PREPROCESSOR=1
 fi
 
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;67m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;33;65m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;172m' # begin underline
 
 # Spaceship theme options
 SPACESHIP_PROMPT_ORDER=(
@@ -44,6 +52,9 @@ SPACESHIP_PROMPT_ORDER=(
   vi_mode       # Vi-mode indicator
 )
 
+SPACESHIP_USER_SUFFIX=""
+SPACESHIP_HOST_PREFIX="@ "
+SPACESHIP_HOST_SUFFIX=""
 SPACESHIP_PROMPT_ADD_NEWLINE=true
 SPACESHIP_PROMPT_SYMBOL=""
 SPACESHIP_DIR_TRUNC=0
