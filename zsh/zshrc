@@ -15,9 +15,9 @@ ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 ZCONFIG_BEFORE=(
   "settings.zsh"
   "appearance.zsh"
-  "settings.local.zsh"
   "keybindings.zsh"
   "aliases.zsh"
+  "settings.local.zsh"
 )
 ZCONFIG_AFTER=(
   "completion.zsh"

@@ -20,6 +20,7 @@ setopt hist_save_no_dups
 setopt hist_verify
 
 # misc ZSH options
+setopt auto_cd
 setopt interactivecomments
 setopt extended_glob
 
