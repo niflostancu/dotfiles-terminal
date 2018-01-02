@@ -2,8 +2,6 @@
 # Environment variables
 # To be loaded by both the shell and X (try to keep a shell-agnostic syntax)
 
-test -z "$PROFILE_LOADED" || return
-
 # Standard programs
 # =================
 export EDITOR='vim'
