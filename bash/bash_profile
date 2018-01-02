@@ -1,0 +1,5 @@
+#!/bin/sh
+# Bash profile script, loaded for interactive logins
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
