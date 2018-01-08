@@ -1,7 +1,7 @@
 # Interactive ZSH configuration script
 
 # Always start a TMUX session
-if [[ -z "$TMUX" ]]; then
+if [[ -z "$TMUX" ]] && [[ "$(id -u)" != "0" ]]; then
   if tmux has-session -t "tmp" 2>/dev/null; then
     exec tmux -2 attach-session -t "tmp"
   else
@@ -37,8 +37,6 @@ zconfig_plugins_include() {
   zgen load zsh-users/zsh-autosuggestions
   # Up-Down based history search
   zgen load zsh-users/zsh-history-substring-search
-  # Fast command-line syntax highlighting
-  zgen load zdharma/fast-syntax-highlighting
   # Enhanced ls script
   zgen load supercrabtree/k
 
@@ -50,6 +48,9 @@ zconfig_plugins_include() {
 
   # Spaceship Theme (requires OMZ)
   zgen load denysdovhan/spaceship-zsh-theme spaceship
+
+  # Fast command-line syntax highlighting
+  zgen load zdharma/fast-syntax-highlighting
 
   [[ -f "$ZSH_CONFIG_DIR/plugins.local.zsh" ]] && source "$ZSH_CONFIG_DIR/plugins.local.zsh"
 }
