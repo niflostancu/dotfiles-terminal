@@ -1,4 +1,5 @@
 # Local customization files
+*.local
 *.local.sh
 *.local.zsh
 
