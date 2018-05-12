@@ -4,7 +4,7 @@
 BASHCONFDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [[ -f "$HOME/.bashrc" ]]; then
-  echo "Zsh configuration files already exist on '$HOME'!"
+  echo "Bash configuration files already exist in '$HOME'!"
   ls -la "$HOME/.bash"*
   read -p "Are you sure you want to replace it? " -n 1 -r
   echo

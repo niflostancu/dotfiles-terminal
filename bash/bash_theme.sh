@@ -6,6 +6,8 @@ __GRAY_COLOR="[37m"
 __PINK_COLOR="[35m"
 __GREEN_COLOR="[32m"
 __ORANGE_COLOR="[33m"
+__BLUE_COLOR="[34m"
+__CYAN_COLOR="[36m"
 __RED_COLOR="[31m"
 __BOLD=$(tput bold)
 __NORMAL=$(tput sgr0)
@@ -13,13 +15,13 @@ __NORMAL=$(tput sgr0)
 if [ `id -u` == '0' ]; then
   __USER_COLOR=$__RED_COLOR
 else
-  __USER_COLOR=$__PINK_COLOR
+  __USER_COLOR=$__ORANGE_COLOR
 fi
 
 mitsuhikos_lastcommandfailed() {
   code=$?
   if [ $code != 0 ]; then
-    echo -n $'\033[37m exited \033[31m'
+    echo -n $'\033[37m \033[31mx'
     echo -n $code
     echo -n $'\033[37m'
   fi
@@ -62,9 +64,9 @@ mitsuhikos_virtualenv() {
   bind '"\C-w": unix-filename-rubout'
 }
 
-export __BASEPROMPT='\e]0;\007\n${__BOLD}\e${__USER_COLOR}\u \
-\e${__GRAY_COLOR}at \e${__ORANGE_COLOR}\h \
-\e${__GRAY_COLOR}in \e${__GREEN_COLOR}\w\
+export __BASEPROMPT='\e]0;\007\n${__BOLD}\e${__USER_COLOR}\u\
+\e${__GRAY_COLOR}@\e${__BLUE_COLOR}\h \
+\e${__GRAY_COLOR}in \e${__CYAN_COLOR}\w\
 `mitsuhikos_lastcommandfailed`\
 `mitsuhikos_backgroundjobs`\
 `mitsuhikos_virtualenv`\
