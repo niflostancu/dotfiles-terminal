@@ -1,5 +1,11 @@
-# Aliases
-#
+# Aliases & commands
+
+function ssr() {
+    ssh $@ -t "
+    REMOTERC=\"\$HOME/.$USER.bashrc\"
+    find \"\$REMOTERC\" -mmin +120 -quit 2>/dev/null || wget --quiet -N "$BASHRC_PUBLIC_URL" -O \"\$REMOTERC\";
+    bash --rcfile \"\$REMOTERC\""
+}
 
 alias vi='nvim'
 alias vim='nvim'

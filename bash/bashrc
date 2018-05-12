@@ -5,12 +5,14 @@
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 [[ -f "$XDG_CONFIG_HOME/profile.sh" ]] && . "$XDG_CONFIG_HOME/profile.sh"
 
-BASH_CONFIG_DIR="$(dirname "$(readlink -f "$(readlink "${BASH_SOURCE[0]}")")")"
-
 # If the shell is not interactive, quit
 [[ -z "$PS1" ]] && return
 
+#{INCLUDE bash_theme.sh}
+#{REMOTE DELETE}
+BASH_CONFIG_DIR="$(dirname "$(readlink -f "$(readlink "${BASH_SOURCE[0]}")")")"
 . "$BASH_CONFIG_DIR/bash_theme.sh"
+#{/REMOTE DELETE}
 
 # Sensible bash defaults
 
