@@ -101,3 +101,4 @@ typeset -gA FAST_HIGHLIGHT_STYLES
 #FAST_HIGHLIGHT_STYLES[comment]='fg=gray,bold'
 #FAST_HIGHLIGHT_STYLES[assign]='none'
 
+

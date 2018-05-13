@@ -8,6 +8,8 @@ ZGEN_INSTALL_DIR="$ZSH_CACHE_DIR/zgen"
 # Disable Zgen's compinit
 ZGEN_AUTOLOAD_COMPINIT=0
 
+zconfig_plugin_files=()
+
 # Lazy-load zgen
 if ! type "zgen" > /dev/null; then
   zgen() {
@@ -19,11 +21,14 @@ if ! type "zgen" > /dev/null; then
   }
 fi
 
+# called when the cache is compiled to add the zgen plugins
 zconfig_zgen_rebuild() {
   zgen reset
-  zconfig_plugins_include
+
+  for file in ${(@)zconfig_plugin_files}; {
+    source "$file"
+  }
+
   zgen save
 }
-
-ZCONFIG_LIB_LOADED=1
 

@@ -1,9 +1,12 @@
+#
 # Generic ZSH settings
+#
 # NOTE: this file is loaded before any plugin!
+#
 
-mkdir -p "$ZSH_DATA_DIR"
-
+#
 # History configuration
+
 HISTFILE="$ZSH_DATA_DIR/history"
 HISTSIZE=100000
 SAVEHIST=100000

@@ -1,4 +1,6 @@
-# Personal key bindings
+#
+# Zsh key bindings
+#
 
 # 10ms for key sequences
 KEYTIMEOUT=1

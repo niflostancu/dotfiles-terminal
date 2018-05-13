@@ -1,5 +1,7 @@
 # Aliases & commands
 
+# Auto bashrc propagation over SSH
+# Inspired by https://superuser.com/questions/587870/auto-propagation-of-bash-settings-across-many-machines
 function ssr() {
     ssh $@ -t "
     REMOTERC=\"\$HOME/.$USER.bashrc\"
