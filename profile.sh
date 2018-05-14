@@ -13,7 +13,7 @@ export PAGER='less'
 PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-test -f "$XDG_CONFIG_HOME/profile.local.sh" && . "$XDG_CONFIG_HOME/profile.local.sh"
+test -f "$XDG_CONFIG_HOME/profile.custom.sh" && . "$XDG_CONFIG_HOME/profile.custom.sh"
 
 export PATH
 

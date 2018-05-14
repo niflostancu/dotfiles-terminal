@@ -8,7 +8,7 @@ bash "$SRC_DIR/zsh/install.sh"
 # Install the profile scripts
 ln -s "$SRC_DIR/profile.sh" "$XDG_CONFIG_HOME/profile.sh"
 
-if [[ -f "$SRC_DIR/profile.local.sh" ]]; then
-  ln -s "$SRC_DIR/profile.local.sh" "$XDG_CONFIG_HOME/profile.local.sh"
+if [[ -f "$SRC_DIR/profile.custom.sh" ]]; then
+  ln -s "$SRC_DIR/profile.custom.sh" "$XDG_CONFIG_HOME/profile.custom.sh"
 fi
 

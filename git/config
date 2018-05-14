@@ -1,12 +1,12 @@
 [core]
 	# Global ignore list (copy globalignore.example)
-	excludesfile = ~/.config/git/globalignore.local
+	excludesfile = ~/.config/git/globalignore.custom
 	pager = less -FXRS -x2
 	editor = vim
 	whitespace = cr-at-eol
 	autocrlf = input
 
-# Hint: add this to a file named "config.local"
+# Hint: add this to a file named "config.custom"
 #[user]
 #	name = Your Name
 #	email = your@email.com
@@ -120,5 +120,5 @@
 
 [include]
 	# Include local overrides
-	path = config.local
+	path = config.custom
 
