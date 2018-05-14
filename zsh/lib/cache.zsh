@@ -50,31 +50,26 @@ zconfig_rebuild_cache() {
   # The directory containing the configuration files to compile
   local conf_dir="$(dirname "$ZSH_CONFIG_DIR")/shell-conf.d"
   local -a conf_files
-  local -a conf_files2
-  conf_files=(
-    $conf_dir/*.zsh
-    $conf_dir/*.sh
-  )
-  conf_files=("${(@i)conf_files}")  # sort the files
-  conf_files2=()
+  conf_files=()
   zconfig_plugin_files=()  # note: this is global, shared with lib/zgen.zsh
   # need to append the plugin loading code after config #5x
   # basically, the plugin loading code would be 60
   local plugins_entry_found=
-  for file in ${(@)conf_files}; {
+  while IFS=  read -r -d $'\0' file; do
     if [[ "$file" =~ '/5[0-9][^/]+\.zsh$' ]]; then
-      zconfig_plugin_files+=($file)
+      zconfig_plugin_files+=("$file")
       plugins_entry_found=1
       continue
     fi
     if [[ -n $plugins_entry_found ]]; then
-      conf_files2+=("$ZGEN_DIR/init.zsh")
+      conf_files+=("$ZGEN_DIR/init.zsh")
       plugins_entry_found=
     fi
-    conf_files2+=($file)
-  }
+    conf_files+=("$file")
+  done < <(find "$conf_dir" '(' -iname '*.zsh' -o -iname '*.sh' ')' -print0 | sort -n -z)
+
   if [[ -n $plugins_entry_found ]]; then
-    conf_files2+=("$ZGEN_DIR/init.zsh")
+    conf_files+=("$ZGEN_DIR/init.zsh")
   fi
 
   # rebuild the zgen init script
@@ -88,7 +83,7 @@ zconfig_rebuild_cache() {
     "lib/utils.zsh"
     "lib/zgen.zsh"
     "lib/cache.zsh"
-    $conf_files2
+    $conf_files
   )
 
   echo "# This file is generated automatically, do not edit by hand!" > "$ZCACHE"

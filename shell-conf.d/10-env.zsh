@@ -22,6 +22,6 @@ cdpath=(
 # Set GPG TTY
 export GPG_TTY=$(tty)
 
-# Remote bashrc gist (you can override it inside a 10-envx.local conf. file)
-BASHRC_PUBLIC_URL=""
+# Remote bashrc gist (override it using e.g. '11-env.custom.zsh' file)
+# BASHRC_PUBLIC_URL=""
 
