@@ -1,11 +1,13 @@
 # Interactive ZSH configuration script
 
-# Always start a TMUX session
-if [[ -z "$TMUX" ]] && [[ "$(id -u)" != "0" ]]; then
-  if tmux has-session -t "tmp" 2>/dev/null; then
-    exec tmux -2 attach-session -t "tmp"
-  else
-    exec tmux -2 new-session -s "tmp"
+# Always start a TMUX session, except on TTYs and SSHs
+if [[ -z "$TMUX" ]] && [[ "$(id -u)" != "0" ]] && ; then
+  if [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ "$(tty)" != "/dev/tty"* ]]; then
+    if tmux has-session -t "tmp" 2>/dev/null; then
+      exec tmux -2 attach-session -t "tmp"
+    else
+      exec tmux -2 new-session -s "tmp"
+    fi
   fi
 fi
 
