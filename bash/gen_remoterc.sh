@@ -7,7 +7,7 @@ function script_remote_delete()
 
 function script_include_theme()
 {
-    sed -e '/#{INCLUDE bash_theme\.sh}/ {' -e "d;" -e 'r bash_theme.sh;' -e "}"
+    sed -e '/#{INCLUDE bash_theme\.sh}/r bash_theme.sh'
 }
 
 function generaterc()

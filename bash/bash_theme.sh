@@ -18,6 +18,12 @@ else
   __USER_COLOR=$__ORANGE_COLOR
 fi
 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  __HOST_COLOR=$__PINK_COLOR
+else
+  __HOST_COLOR=$__BLUE_COLOR
+fi
+
 mitsuhikos_lastcommandfailed() {
   code=$?
   if [ $code != 0 ]; then
@@ -65,7 +71,7 @@ mitsuhikos_virtualenv() {
 }
 
 export __BASEPROMPT='\e]0;\007\n${__BOLD}\e${__USER_COLOR}\u\
-\e${__GRAY_COLOR}@\e${__BLUE_COLOR}\h \
+\e${__GRAY_COLOR}@\e${__HOST_COLOR}\h \
 \e${__GRAY_COLOR}in \e${__CYAN_COLOR}\w\
 `mitsuhikos_lastcommandfailed`\
 `mitsuhikos_backgroundjobs`\
