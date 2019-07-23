@@ -1,8 +1,2 @@
 # Startup file read in interactive login shells (loaded after zshrc)
 
-if [[ -n "$TMUX_PANE_RESTORE_CMD" ]]; then
-  # Restore tmux pane contents
-  "$TMUX_PANE_RESTORE_CMD"
-  export TMUX_PANE_RESTORE_CMD=
-fi
-
