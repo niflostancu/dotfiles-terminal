@@ -1,6 +1,6 @@
 # Local customization files
-*.custom
-*.custom.sh
-*.custom.zsh
+*.local
+*.local.sh
+*.local.zsh
 bash/remoterc
 

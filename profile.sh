@@ -1,6 +1,6 @@
 #!/bin/sh
-# Environment variables
-# To be loaded by both the shell and X (try to keep a shell-agnostic syntax)
+# Environment Profile
+# To be loaded by both the shell and X programs
 
 # Standard programs
 # =================
@@ -9,16 +9,20 @@ export GIT_EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 
+# Explicit XDG paths
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
 # Common PATHs 
 PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-test -f "$XDG_CONFIG_HOME/profile.custom.sh" && . "$XDG_CONFIG_HOME/profile.custom.sh"
-
 export PATH
 
-TMUXP_CONFIG_DIR=${XDG_DATA_HOME:-$HOME/.local/share}/tmux/tmuxp/
-export TMUXP_CONFIG_DIR
+# Set GPG TTY
+export GPG_TTY=$(tty)
+
+# Load local profile overrides
+[ ! -f "$XDG_CONFIG_HOME/profile.local.sh" ] || source "$XDG_CONFIG_HOME/profile.local.sh"
 
 PROFILE_LOADED=1
 export PROFILE_LOADED

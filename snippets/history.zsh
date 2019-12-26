@@ -1,12 +1,9 @@
-#
-# Generic ZSH settings
-#
-# NOTE: this file is loaded before any plugin!
+# ZSH history settings
 #
 
-#
-# History configuration
+[[ -d "$ZSH_DATA_DIR" ]] || mkdir -p "$ZSH_DATA_DIR"
 
+# Store the history file inside the persisted data dir
 HISTFILE="$ZSH_DATA_DIR/history"
 HISTSIZE=100000
 SAVEHIST=100000
@@ -24,8 +21,9 @@ setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt hist_verify
 
-# misc ZSH options
-setopt auto_cd
-setopt interactivecomments
-setopt extended_glob
+# Prompt autosuggestions based on history
+zplugin light zsh-users/zsh-autosuggestions
+
+# Up-Down based history search
+zplugin light zsh-users/zsh-history-substring-search
 

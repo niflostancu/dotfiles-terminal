@@ -1,8 +1,0 @@
-# Load environment variables
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-[[ -f "$XDG_CONFIG_HOME/profile.sh" ]] && . "$XDG_CONFIG_HOME/profile.sh"
-

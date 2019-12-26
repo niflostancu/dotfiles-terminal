@@ -1,7 +1,10 @@
-#
-# Fast highlight customization
+# Fast highlight and customization
 #
 
+# Fast command-line syntax highlighting (defer after compinit)
+zplugin light "zdharma/fast-syntax-highlighting"
+
+# Plugin config vars
 typeset -gA FAST_HIGHLIGHT_STYLES
 
 # Aliases and functions
