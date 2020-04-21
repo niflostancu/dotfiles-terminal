@@ -24,6 +24,10 @@ export GPG_TTY=$(tty)
 # Load local profile overrides
 [ ! -f "$XDG_CONFIG_HOME/profile.local.sh" ] || source "$XDG_CONFIG_HOME/profile.local.sh"
 
+# Don't forget to setup the zconfig profile you want to use inside
+# `profile.local.sh` or `.zshenv`:
+#ZCONFIG_PROFILE=workstation
+
 PROFILE_LOADED=1
 export PROFILE_LOADED
 
