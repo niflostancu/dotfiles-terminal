@@ -5,8 +5,9 @@
 function ssr() {
     ssh $@ -t "
     REMOTERC=\"\$HOME/.$USER.bashrc\"
+    if [[ -z \"$BASHRC_PUBLIC_URL\" ]]; then echo \"Error: No BASHRC_PUBLIC_URL defined!\"; exec bash; fi
     find \"\$REMOTERC\" -mmin +120 -quit 2>/dev/null || wget --quiet -N "$BASHRC_PUBLIC_URL" -O \"\$REMOTERC\";
-    bash --rcfile \"\$REMOTERC\""
+    exec bash --rcfile \"\$REMOTERC\""
 }
 
 # SSH aliases
