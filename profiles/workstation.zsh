@@ -12,6 +12,7 @@
 @zconfig-snippet "pretty-linux"
 @zconfig-snippet "ssh"
 @zconfig-snippet "tmux"
+@zconfig-snippet "direnv"
 
 # zsh theme
 @zconfig-snippet "themes/spaceship"
