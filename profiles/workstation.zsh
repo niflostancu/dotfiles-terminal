@@ -13,6 +13,7 @@
 @zconfig-snippet "ssh"
 @zconfig-snippet "tmux"
 @zconfig-snippet "direnv"
+@zconfig-snippet "python"
 
 # zsh theme
 @zconfig-snippet "themes/spaceship"
