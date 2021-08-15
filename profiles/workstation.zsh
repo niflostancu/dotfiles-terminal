@@ -14,6 +14,7 @@
 @zconfig-snippet "tmux"
 @zconfig-snippet "direnv"
 @zconfig-snippet "python"
+@zconfig-snippet "sync-utils"
 
 # zsh theme
 @zconfig-snippet "themes/spaceship"
