@@ -7,7 +7,7 @@ ZCFG_INSTALL_FZF=${ZCFG_INSTALL_FZF:-1}
 
 # VI mode?
 if [[ "$ZCFG_VI_MODE" == "1" ]]; then
-  zplugin snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
+  zi snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
 fi
 
 # 10ms for key sequences
@@ -16,14 +16,13 @@ KEYTIMEOUT=1
 # Fuzzy Finder (needs to be installed via package manager)
 HAS_FZF=0
 if [[ "$ZCFG_INSTALL_FZF" == "1" ]]; then
-  zplugin ice from"gh-r" as"program"
-  zplugin load junegunn/fzf-bin
-  zplugin ice pick"shell/key-bindings.zsh"
-  zplugin light junegunn/fzf
+  zi ice from"gh-r" as"program"
+  zi ice pick"shell/key-bindings.zsh"
+  zi light junegunn/fzf
   HAS_FZF=1
 elif [[ -s "/usr/share/fzf/key-bindings.zsh" ]]; then
-  zplugin load "/usr/share/fzf/key-bindings.zsh"
-  zplugin load "/usr/share/fzf/completion.zsh"
+  zi load "/usr/share/fzf/key-bindings.zsh"
+  zi load "/usr/share/fzf/completion.zsh"
   HAS_FZF=1
 fi
 if [[ "$HAS_FZF" == "1" ]]; then

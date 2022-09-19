@@ -14,11 +14,11 @@ source "$ZSH_CONFIG_DIR/lib/zsh/plugin.zsh"
 source "$ZSH_CONFIG_DIR/lib/zsh/profile.zsh"
 
 # init the plugin manager
-zconfig::plugin.init
+zconfig::plugin.init || return 1
 
 # load the profile and snippets
-zconfig::load-profile
+zconfig::load-profile || return 1
 
 # load the completions defined by the snippets / plugins
-zconfig::plugin.load_completions
+zconfig::plugin.load_completions || return 1
 

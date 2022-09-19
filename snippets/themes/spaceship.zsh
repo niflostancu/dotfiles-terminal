@@ -26,7 +26,7 @@ function .spaceship_theme_loaded() {
     #aws           # Amazon Web Services section
     venv          # virtualenv section
     #conda         # conda virtualenv section
-    pyenv         # Pyenv section
+    # pyenv         # Pyenv section
     #dotnet        # .NET section
     #ember         # Ember.js section
     #kubecontext   # Kubectl context section
@@ -62,7 +62,8 @@ function .spaceship_theme_loaded() {
   SPACESHIP_VI_MODE_COLOR="yellow"
 }
 
-# Spaceship Theme (requires OMZ)
-zplugin ice atload'.spaceship_theme_loaded'
-zplugin light denysdovhan/spaceship-zsh-theme
+# Install Spaceship Prompt
+zi ice atload'.spaceship_theme_loaded'
+zi light spaceship-prompt/spaceship-prompt
+zi light "spaceship-prompt/spaceship-vi-mode"
 

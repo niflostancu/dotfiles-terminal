@@ -1,26 +1,29 @@
 # Plugin manager utilities
 #
 
-ZPLUGIN_GIT_URL=https://github.com/zdharma/zplugin.git
-ZPLUGIN_DIR="${ZSH_CACHE_DIR}/bin"
+ZI_GIT_URL=https://github.com/z-shell/zi.git
 
-# Custom zplugin paths
-declare -A ZPLGM
-ZPLGM[BIN_DIR]="$ZPLUGIN_DIR"
-ZPLGM[HOME_DIR]="$ZSH_CACHE_DIR"
+# Custom zi config
+typeset -Ag ZI
+export ZI[HOME_DIR]="$ZSH_CACHE_DIR"
+export ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
 
 zconfig::plugin.init() {
-  # check / install zplugin
-  if [ ! -f "$ZPLUGIN_DIR/zplugin.zsh" ]; then
-    mkdir -p "$(dirname "$ZPLUGIN_DIR")"
-    git clone "$ZPLUGIN_GIT_URL" "$ZPLUGIN_DIR"
+  # check / install zi
+  if [[ -f "$ZSH_CACHE_DIR/bin/zinit.zsh" ]]; then
+    echo "Old zinit cache found. Please delete $ZSH_CACHE_DIR to continue!" >&2
+    return 1
   fi
-  source "$ZPLUGIN_DIR/zplugin.zsh"
+  if [ ! -f "${ZI[BIN_DIR]}/zi.zsh" ]; then
+    command mkdir -p "${ZI[BIN_DIR]}"
+    command git clone "$ZI_GIT_URL" "${ZI[BIN_DIR]}"
+  fi
+  source "${ZI[BIN_DIR]}/zi.zsh"
 }
 
 zconfig::plugin.load_completions() {
   autoload -Uz compinit && \
     compinit -C -d "$ZSH_CACHE_DIR/zcompdump"
-  zplugin cdreplay -q
+  zi cdreplay -q
 }
 

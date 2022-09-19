@@ -22,8 +22,8 @@ setopt hist_save_no_dups
 setopt hist_verify
 
 # Prompt autosuggestions based on history
-zplugin light zsh-users/zsh-autosuggestions
+zi light zsh-users/zsh-autosuggestions
 
 # Up-Down based history search
-zplugin light zsh-users/zsh-history-substring-search
+zi light zsh-users/zsh-history-substring-search
 

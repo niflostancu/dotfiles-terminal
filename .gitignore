@@ -3,4 +3,7 @@
 *.local.sh
 *.local.zsh
 bash/remoterc
+.zcompdump
+/.zshrc
+/.zshenv
 

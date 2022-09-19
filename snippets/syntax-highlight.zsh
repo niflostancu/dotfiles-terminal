@@ -2,7 +2,7 @@
 #
 
 # Fast command-line syntax highlighting (defer after compinit)
-zplugin light "zdharma/fast-syntax-highlighting"
+zi light z-shell/F-Sy-H
 
 # Plugin config vars
 typeset -gA FAST_HIGHLIGHT_STYLES
