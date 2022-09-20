@@ -2,7 +2,7 @@
 #
 
 # Fast command-line syntax highlighting (defer after compinit)
-zi light z-shell/F-Sy-H
+zi_load z-shell/F-Sy-H
 
 # Plugin config vars
 typeset -gA FAST_HIGHLIGHT_STYLES

@@ -19,6 +19,10 @@ zconfig::plugin.init() {
     command git clone "$ZI_GIT_URL" "${ZI[BIN_DIR]}"
   fi
   source "${ZI[BIN_DIR]}/zi.zsh"
+
+  # instal ZI annexes
+  zi light z-shell/z-a-bin-gem-node
+  zi light z-shell/z-a-patch-dl
 }
 
 zconfig::plugin.load_completions() {
@@ -26,4 +30,12 @@ zconfig::plugin.load_completions() {
     compinit -C -d "$ZSH_CACHE_DIR/zcompdump"
   zi cdreplay -q
 }
+
+# zi aliases
+z_lucid() { zi ice lucid "$@"; }
+zi0a() { z_lucid wait'0a' "$@"; }
+zi_program() { zi0a sbin"" "$@"; }
+zi_program_ghr() { zi_program from"gh-r" "$@"; }
+
+zi_load() { zi load "$@"; }
 

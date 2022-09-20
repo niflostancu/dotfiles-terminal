@@ -16,9 +16,7 @@ KEYTIMEOUT=1
 # Fuzzy Finder (needs to be installed via package manager)
 HAS_FZF=0
 if [[ "$ZCFG_INSTALL_FZF" == "1" ]]; then
-  zi ice from"gh-r" as"program"
-  zi ice pick"shell/key-bindings.zsh"
-  zi light junegunn/fzf
+  zi pack"bgn-binary+keys" for fzf
   HAS_FZF=1
 elif [[ -s "/usr/share/fzf/key-bindings.zsh" ]]; then
   zi load "/usr/share/fzf/key-bindings.zsh"
