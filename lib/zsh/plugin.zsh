@@ -23,6 +23,7 @@ zconfig::plugin.init() {
   # instal ZI annexes
   zi light z-shell/z-a-bin-gem-node
   zi light z-shell/z-a-patch-dl
+  zi light z-shell/z-a-submods
 }
 
 zconfig::plugin.load_completions() {
