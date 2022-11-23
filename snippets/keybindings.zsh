@@ -16,7 +16,13 @@ KEYTIMEOUT=1
 # Fuzzy Finder (needs to be installed via package manager)
 HAS_FZF=0
 if [[ "$ZCFG_INSTALL_FZF" == "1" ]]; then
-  zi pack"bgn-binary+keys" for fzf
+  zi for from'gh-r' \
+    dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion' \
+    dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
+    dl'https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZI[MAN_DIR]/man1/fzf-tmux.1' \
+    dl'https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZI[MAN_DIR]/man1/fzf.1' \
+    id-as'junegunn/fzf' nocompile pick'/dev/null' sbin'fzf' src'key-bindings.zsh' \
+      junegunn/fzf
   HAS_FZF=1
 elif [[ -s "/usr/share/fzf/key-bindings.zsh" ]]; then
   zi load "/usr/share/fzf/key-bindings.zsh"
