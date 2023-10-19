@@ -4,7 +4,9 @@
 [[ -d "$ZSH_DATA_DIR" ]] || mkdir -p "$ZSH_DATA_DIR"
 
 # Store the history file inside the persisted data dir
-HISTFILE="$ZSH_DATA_DIR/history"
+ZCONFIG_HISTORY_NAME=${ZCONFIG_HISTORY_NAME:-history}
+
+HISTFILE="$ZSH_DATA_DIR/$ZCONFIG_HISTORY_NAME"
 HISTSIZE=100000
 SAVEHIST=100000
 HIST_STAMPS="dd.mm.yyyy"
@@ -22,8 +24,8 @@ setopt hist_save_no_dups
 setopt hist_verify
 
 # Prompt autosuggestions based on history
-zi light zsh-users/zsh-autosuggestions
+zi_load zsh-users/zsh-autosuggestions
 
 # Up-Down based history search
-zi light zsh-users/zsh-history-substring-search
+zi_load zsh-users/zsh-history-substring-search
 
