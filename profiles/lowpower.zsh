@@ -9,7 +9,7 @@
 @zconfig-snippet --optional "paths.local"
 
 @zconfig-snippet "aliases"
-@zconfig-snippet "pretty-linux"
+@zconfig-snippet "alias-pretty"
 @zconfig-snippet "ssh"
 @zconfig-snippet "tmux"
 

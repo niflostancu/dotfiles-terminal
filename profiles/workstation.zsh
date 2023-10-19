@@ -8,8 +8,10 @@
 # Local customizations
 @zconfig-snippet --optional "paths.local"
 
+ZCFG_VIM_AS_MAN="lvim '+Man!'"
 @zconfig-snippet "aliases"
-@zconfig-snippet "pretty-linux"
+@zconfig-snippet "alias-pretty"
+
 @zconfig-snippet "ssh"
 @zconfig-snippet "tmux"
 @zconfig-snippet "direnv"

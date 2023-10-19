@@ -1,9 +1,11 @@
-# Several aliases.
+# Aliases / shorthands for common commands.
 # This module is also compatible with bash
 #
-
-# Available configuration variables (and their default values):
+# Customization variables:
 # - ALIAS_NVIM=1 - whether to alias neovim as vim (if installed)
+# - ZCFG_VIM_AS_MAN: set to vim / nvim to enable using vim as man pager (requires
+#   'man' filetype);
+#
 
 # x to open file in XDG registered program
 function x() {
@@ -26,16 +28,21 @@ alias ..="cd .."
 alias -- -="cd -"
 
 # Editors
-export EDITOR='vim'
-export GIT_EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
+export EDITOR=${EDITOR:-'vim'}
+export GIT_EDITOR="$EDITOR"
+export VISUAL="$EDITOR"
+export PAGER=${PAGER:-'less'}
 
 if [[ "$ALIAS_NVIM" == "1" ]] && @quiet command -v nvim; then
   alias vi='nvim'
   alias vim='nvim'
-  # Use nvim as man pager
-  export MANPAGER="nvim -c 'set ft=man' -"
+  EDITOR=nvim
+fi
+
+# Use vim / nvim as man pager
+if [[ -n "$ZCFG_VIM_AS_MAN" ]]; then
+  if [[ "$ZCFG_VIM_AS_MAN" == "1" ]]; then ZCFG_VIM_AS_MAN="vim"; fi
+  export MANPAGER="$ZCFG_VIM_AS_MAN +'set ft=man' -"
 fi
 
 # LS customization
@@ -47,22 +54,5 @@ if [[ -n "$ZCONFIG_LS_K" ]]; then
 else
   alias ll="ls -lh"
   alias la="ls -lha"
-fi
-alias ls="/bin/ls --color=auto -h"
-
-# Colored less and grep
-export LESS='-g -i -M -R -S -w -z-4'
-export GREP_COLOR='38;5;202'
-alias grep="grep --color=auto"
-
-# Colored & human friendly system commands
-alias ip="ip -c"
-alias df="df -h"
-alias free="free -h"
-
-# Set the Less input preprocessor.
-if @quiet command -v lesspipe.sh; then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-  export LESS_ADVANCED_PREPROCESSOR=1
 fi
 
