@@ -3,9 +3,10 @@
 # local local completions
 [ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
-# completion caching; use rehash to clear
+# completion caching
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR"
+zstyle ':completion:*' rehash true
 
 # Ignore completion for private commands
 zstyle ':completion:*:functions' ignored-patterns '_*'
