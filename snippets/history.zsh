@@ -4,7 +4,55 @@
 [[ -d "$ZSH_DATA_DIR" ]] || mkdir -p "$ZSH_DATA_DIR"
 
 # Store the history file inside the persisted data dir
-ZCONFIG_HISTORY_NAME=${ZCONFIG_HISTORY_NAME:-history}
+ZCONFIG_HISTORY_NAME=${ZCONFIG_HISTORY_NAME:-"history"}
+ZCONFIG_HISTORY_MERGE=${ZCONFIG_HISTORY_MERGE:-"history.*"}
+_HIST_LOCK_FILE="$ZSH_CACHE_DIR/histfile.lock"
+
+# merges multiple history files (eliminating duplicates)
+function zconfig_hist_merge() {
+	(
+		setopt nullglob
+		local own_histfile="$ZSH_DATA_DIR/$ZCONFIG_HISTORY_NAME"
+		local merge_files=("$@")
+		if [[ -z "$@" ]]; then
+			merge_files=("$ZSH_DATA_DIR/"${~ZCONFIG_HISTORY_MERGE})
+		fi
+		(; cat "${merge_files[@]}" | \
+			awk -v date="WILL_NOT_APPEAR$(date +"%s")" '{if (sub(/\\$/,date)) printf "%s", $0; else print $0}' | \
+			LC_ALL=C sort -u | \
+			awk -v date="WILL_NOT_APPEAR$(date +"%s")" '{gsub('date',"\\\n"); print $0}'
+		) > "$own_histfile"
+		echo "History merged: ${merge_files[@]}!"
+	)
+}
+
+if [[ -n "$ZCONFIG_HISTORY_MERGE" ]]; then
+	[[ -f "$_HIST_LOCK_FILE" ]] || touch --date="yesterday" "$_HIST_LOCK_FILE"
+	(
+		flock -n 9 || exit 0
+		own_histfile="$ZSH_DATA_DIR/$ZCONFIG_HISTORY_NAME"
+		mins_ago=$(date -d 'now - 5 min' +%s)
+		hist_time=$(date -r "$_HIST_LOCK_FILE" +%s)
+		if (( hist_time >= mins_ago )); then
+			exit 0
+		fi
+		touch "$_HIST_LOCK_FILE"
+		# expand the files
+		setopt nullglob
+		merge_files=("$ZSH_DATA_DIR/"${~ZCONFIG_HISTORY_MERGE})
+		proceed_merge=
+		for histf in $merge_files; do
+			if [[ "$histf" == "$own_histfile" ]]; then continue; fi
+			if [[ -f "$histf" && "$histf" -nt "$own_histfile" ]]; then
+				proceed_merge=1
+				break
+			fi
+		done
+		if [[ -n "$proceed_merge" ]]; then
+			zconfig_hist_merge
+		fi
+	) 9<"$_HIST_LOCK_FILE"
+fi
 
 HISTFILE="$ZSH_DATA_DIR/$ZCONFIG_HISTORY_NAME"
 HISTSIZE=100000
