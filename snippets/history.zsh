@@ -8,6 +8,23 @@ ZCONFIG_HISTORY_NAME=${ZCONFIG_HISTORY_NAME:-"history"}
 ZCONFIG_HISTORY_MERGE=${ZCONFIG_HISTORY_MERGE:-"history.*"}
 _HIST_LOCK_FILE="$ZSH_CACHE_DIR/histfile.lock"
 
+HISTFILE="$ZSH_DATA_DIR/$ZCONFIG_HISTORY_NAME"
+HISTSIZE=100000
+SAVEHIST=100000
+HIST_STAMPS="dd.mm.yyyy"
+HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
+setopt inc_append_history
+setopt extended_history
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_verify
+
 # merges multiple history files (eliminating duplicates)
 function zconfig_hist_merge() {
 	(
@@ -17,11 +34,11 @@ function zconfig_hist_merge() {
 		if [[ -z "$@" ]]; then
 			merge_files=("$ZSH_DATA_DIR/"${~ZCONFIG_HISTORY_MERGE})
 		fi
-		(; cat "${merge_files[@]}" | \
-			awk -v date="WILL_NOT_APPEAR$(date +"%s")" '{if (sub(/\\$/,date)) printf "%s", $0; else print $0}' | \
-			LC_ALL=C sort -u | \
-			awk -v date="WILL_NOT_APPEAR$(date +"%s")" '{gsub('date',"\\\n"); print $0}'
-		) > "$own_histfile"
+		merge_files+=("$own_histfile")
+		for histf in "${merge_files[@]}"; do
+			builtin fc -R -I "$histf"
+		done
+		builtin fc -W
 		echo "History merged: ${merge_files[@]}!"
 	)
 }
@@ -53,23 +70,6 @@ if [[ -n "$ZCONFIG_HISTORY_MERGE" ]]; then
 		fi
 	) 9<"$_HIST_LOCK_FILE"
 fi
-
-HISTFILE="$ZSH_DATA_DIR/$ZCONFIG_HISTORY_NAME"
-HISTSIZE=100000
-SAVEHIST=100000
-HIST_STAMPS="dd.mm.yyyy"
-HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
-
-setopt inc_append_history
-setopt extended_history
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt hist_verify
 
 # Prompt autosuggestions based on history
 zi_load zsh-users/zsh-autosuggestions
