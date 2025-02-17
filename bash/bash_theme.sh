@@ -12,6 +12,8 @@ __RED_COLOR="[31m"
 __BOLD=$(tput bold)
 __NORMAL=$(tput sgr0)
 
+_PYTHON3=python3
+
 if [ `id -u` == '0' ]; then
   __USER_COLOR=$__RED_COLOR
 else
@@ -34,7 +36,7 @@ mitsuhikos_lastcommandfailed() {
 }
 
 mitsuhikos_backgroundjobs() {
-  jobs|python -c 'if 1:
+  jobs | $_PYTHON3 -c 'if 1:
     import sys
     items = ["\033[36m%s\033[37m" % x.split()[2]
              for x in sys.stdin.read().splitlines()]
