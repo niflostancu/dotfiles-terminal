@@ -8,7 +8,7 @@
 # Local customizations
 @zconfig-snippet --optional "paths.local"
 
-ZCFG_VIM_AS_MAN="lvim '+Man!'"
+ZCFG_VIM_AS_MAN="nvim '+Man!'"
 @zconfig-snippet "aliases"
 @zconfig-snippet "alias-pretty"
 

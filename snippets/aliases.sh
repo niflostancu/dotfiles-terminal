@@ -56,3 +56,6 @@ else
   alias la="ls -lha"
 fi
 
+# mkdir + cd
+function mcd() { mkdir -p "$@" && cd "$@" }
+
