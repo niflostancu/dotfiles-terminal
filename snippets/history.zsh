@@ -14,7 +14,8 @@ SAVEHIST=100000
 HIST_STAMPS="dd.mm.yyyy"
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
-setopt inc_append_history
+# implied by share_history
+# setopt inc_append_history
 setopt extended_history
 setopt share_history
 setopt hist_expire_dups_first
