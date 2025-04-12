@@ -19,3 +19,16 @@ if [[ -n "$TMUX_PANE" ]]; then
   fi
 fi
 
+function sync_tmux_export() {
+  builtin export "$@"
+  for envstr in "$@"; do
+    var_name=${envstr%%=*}
+    cur_value=${(P)var_name}
+    tmux set-environment "$var_name" "$cur_value"
+  done
+}
+# Synchronize with TMUX
+if [[ -n "$TMUX_PANE" ]]; then
+  alias export=sync_tmux_export
+fi
+
