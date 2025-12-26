@@ -1,0 +1,75 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+${custom.local_hostname}\
+${custom.ssh_hostname}\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$package\
+$python\
+$buf\
+$direnv\
+$env_var\
+$custom\
+$sudo\
+$cmd_duration\
+$jobs\
+$time\
+$line_break\
+$status\
+$os\
+$container\
+$netns\
+$shell\
+$character"""
+add_newline = true
+
+[character]
+success_symbol = '[➜](bold yellow)'
+
+[username]
+format = '[$user]($style)@'
+disabled = false
+show_always = true
+
+[hostname]
+disabled = true
+
+[custom.local_hostname]
+command = "hostname"
+when = "test ! -n \"$SSH_CONNECTION\""
+format = "[$output]($style) "
+style = "bold blue"
+
+[custom.ssh_hostname]
+command = "hostname"
+symbol = '🌏'
+when = "test -n \"$SSH_CONNECTION\""
+format = "[$output$symbol]($style) "
+style = "bold green"
+
+[directory]
+format='in [$path]($style)[$read_only]($read_only_style) '
+
+[status]
+disabled = false
+symbol = '❌'
+
+[cmd_duration]
+disabled = false
+min_time = 1_000
+show_milliseconds = true
+
+[time]
+disabled = false
+
+[sudo]
+disabled = false

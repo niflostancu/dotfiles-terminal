@@ -14,7 +14,11 @@
 @zconfig-snippet "tmux"
 
 # zsh theme
-@zconfig-snippet "themes/spaceship"
+if type "starship" &>/dev/null; then
+	@zconfig-snippet "themes/starship"
+else
+	@zconfig-snippet "themes/spaceship"
+fi
 
 @zconfig-snippet "syntax-highlight"
 @zconfig-snippet "completion"
