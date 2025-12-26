@@ -63,7 +63,7 @@ function .spaceship_theme_loaded() {
 }
 
 # Install Spaceship Prompt
-zi ice atload'.spaceship_theme_loaded'
-zi light spaceship-prompt/spaceship-prompt
-zi light "spaceship-prompt/spaceship-vi-mode"
+plug "spaceship-prompt/spaceship-prompt"
+plug "spaceship-prompt/spaceship-vi-mode"
+.spaceship_theme_loaded
 

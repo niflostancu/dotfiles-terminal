@@ -73,8 +73,8 @@ if [[ -n "$ZCONFIG_HISTORY_MERGE" ]]; then
 fi
 
 # Prompt autosuggestions based on history
-zi_load zsh-users/zsh-autosuggestions
+plug "zsh-users/zsh-autosuggestions"
 
 # Up-Down based history search
-zi_load zsh-users/zsh-history-substring-search
+plug "zsh-users/zsh-history-substring-search"
 

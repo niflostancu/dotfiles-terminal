@@ -1,14 +1,10 @@
 # Fast highlight and customization
 #
 
-# Fast command-line syntax highlighting (defer after compinit)
-zi wait lucid for \
-  atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    z-shell/F-Sy-H \
-  blockf \
-    zsh-users/zsh-completions \
-  atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions
+# Fast command-line syntax highlighting
+plug "z-shell/F-Sy-H"
+plug "zsh-users/zsh-completions"
+plug "zsh-users/zsh-autosuggestions"
 
 # Plugin config vars
 typeset -gA FAST_HIGHLIGHT_STYLES
